@@ -1,35 +1,88 @@
-import { Tabs } from 'expo-router';
 import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Tabs } from 'expo-router';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { COLORS } from '@/src/constants/theme';
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+const TabLayout = () => {
+    return <Tabs
+        screenOptions={{
+           tabBarActiveTintColor: COLORS.primary,
+        tabBarInactiveTintColor: COLORS.textTertiary,
+        tabBarStyle: {
+          backgroundColor: COLORS.surface,
+          borderTopColor: COLORS.border,
+          borderTopWidth: 0.5,
+        },
+        tabBarLabelStyle: {
+          fontSize: 11,
+          fontWeight: "500",
+        },
+        headerStyle: {
+          backgroundColor: COLORS.background,
+        },
+        headerTintColor: COLORS.textPrimary,
+        headerTitleStyle: {
+          fontWeight: "600",
+          fontSize: 17,
+        },
+        headerShadowVisible: false,
+      
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
+    >
+
+    <Tabs.Screen
+    name="index"
+    options={{
+        title:"Тренування",
+        tabBarIcon:({focused,color,size})=>(
+            <Ionicons name={focused ?"barbell":"barbell-outline"} 
+            size={size} 
+            color={color} />
+        ),
+    }}
+    />
+
+    <Tabs.Screen
+    name="progress"
+    options={{
+        title:"Прогрес",
+        tabBarIcon:({focused,color,size})=>(
+            <Ionicons name={focused ?"trending-up":"trending-up-outline"} 
+            size={size} 
+            color={color} />
+        ),
+    }}
+    />
+
+    <Tabs.Screen
+    name="profile"
+    options={{
+        title:"Профіль",
+        tabBarIcon:({focused,color,size})=>(
+            <Ionicons name={focused ?"person":"person-outline"} 
+            size={size} 
+            color={color} />
+        ),
+    }}
+    />
+
+    <Tabs.Screen
+    name="WaterTracker"
+    options={{
+        title:"WaterTracker",
+        tabBarIcon:({focused,color,size})=>(
+            <Ionicons name={focused ?"water":"water-outline"} 
+            size={size} 
+            color={color} />
+        ),
+    }}
+    />
     </Tabs>
-  );
-}
+
+
+};
+
+const styles = StyleSheet.create({})
+
+export default TabLayout;
