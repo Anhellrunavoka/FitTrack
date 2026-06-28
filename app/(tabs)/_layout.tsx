@@ -1,10 +1,19 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Tabs } from 'expo-router';
+import { Pressable, StyleSheet, View } from 'react-native';
+import { Tabs, useNavigation } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { COLORS } from '@/src/constants/theme';
-
+import {DrawerActions } from '@react-navigation/native'
+import { useUIStore } from '@/src/store/uiStore';
 const TabLayout = () => {
+    const navigation=useNavigation();
+
+    const openDrawer=()=>{
+        navigation.dispatch(DrawerActions.openDrawer());
+    }
+
+   const openAddWorkoutModal = useUIStore((state:any) => state.openAddWorkoutModal);
+
     return <Tabs
         screenOptions={{
            tabBarActiveTintColor: COLORS.primary,
@@ -32,13 +41,23 @@ const TabLayout = () => {
     >
 
     <Tabs.Screen
-    name="index"
+    name="workout"
     options={{
         title:"Тренування",
         tabBarIcon:({focused,color,size})=>(
             <Ionicons name={focused ?"barbell":"barbell-outline"} 
             size={size} 
             color={color} />
+        ),
+        headerLeft:()=>(
+            <Pressable onPress={openDrawer} hitSlop={8} style={{marginLeft:4}}>
+                <Ionicons name="menu" size={26} color={COLORS.textPrimary} />
+            </Pressable>
+        ),
+        headerRight:()=>(
+            <Pressable onPress={openAddWorkoutModal} hitSlop={8} style={{marginRight:4}}>
+                <Ionicons name="add-circle" size={26} color={COLORS.primary} />
+            </Pressable>
         ),
     }}
     />
