@@ -17,7 +17,7 @@ const HomeScreen=() =>{
     router.push(`/workout/${workout.id}`);
   }
   const isModalOpen=useUIStore(state=>state.isAddWorkoutModalOpen);
-  const closeModal=useUIStore(state=>state.closeAddWorkoutModalOpen);
+  const closeModal=useUIStore(state=>state.closeAddWorkoutModal);
   return (
        <View>
           <Text>Home</Text>

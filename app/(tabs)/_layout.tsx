@@ -12,7 +12,7 @@ const TabLayout = () => {
         navigation.dispatch(DrawerActions.openDrawer());
     }
 
-   const openAddWorkoutModal = useUIStore((state:any) => state.openAddWorkoutModal);
+   const openAddWorkoutModal = useUIStore((state) => state.openAddWorkoutModal);
 
     return <Tabs
         screenOptions={{
