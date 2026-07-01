@@ -5,6 +5,7 @@
 export type WorkoutCategory = 'strength' | 'cardio' | 'flexibility';
 
 export type Exercise = {
+  isCompleted: any;
   id: string;
   name: string;
   sets: number;
